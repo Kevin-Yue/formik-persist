@@ -17,7 +17,7 @@ class PersistImpl extends React.Component<
   };
 
   saveForm = debounce((data: FormikProps<{}>) => {
-    window.localStorage.setItem(this.props.name, JSON.stringify(data));
+    window.sessionStorage.setItem(this.props.name, JSON.stringify(data));
   }, this.props.debounce);
 
   componentDidUpdate(prevProps: PersistProps & { formik: FormikProps<any> }) {
@@ -27,7 +27,7 @@ class PersistImpl extends React.Component<
   }
 
   componentDidMount() {
-    const maybeState = window.localStorage.getItem(this.props.name);
+    const maybeState = window.sessionStorage.getItem(this.props.name);
     if (maybeState && maybeState !== null) {
       this.props.formik.setFormikState(JSON.parse(maybeState));
     }
